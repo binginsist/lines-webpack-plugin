@@ -1,0 +1,9 @@
+const warning1 = 1;
+const warning2 = 2;
+const warning3 = 3;
+const warning4 = 4;
+const warning5 = 5;
+const warning6 = 6;
+const warning7 = 7;
+const warning8 = 8;
+export const warning = {warning1}

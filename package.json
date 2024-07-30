@@ -1,0 +1,22 @@
+{
+  "name": "lines-webpack-plugin",
+  "version": "1.0.0",
+  "description": "限制文件行数的webpack插件",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/binginsist/lines-webpack-plugin.git"
+  },
+  "keywords": [
+    "lines-webpack-plugin"
+  ],
+  "author": "binginsist",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/binginsist/lines-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/binginsist/lines-webpack-plugin#readme"
+}

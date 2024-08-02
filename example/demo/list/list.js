@@ -1,0 +1,16 @@
+const list1 = 1;
+const list2 = 2;
+const list3 = 3;
+const list4 = 4;
+const list5 = 5;
+const list6 = 6;
+const list7 = 7;
+const list8 = 8;
+const list9 = 9;
+const list10 = 10;
+const list11 = 11;
+const list12 = 12;
+const list13 = 13;
+const list14 = 14;
+const list15 = 15;
+export const list = {list1}

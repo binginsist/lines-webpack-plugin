@@ -3,7 +3,8 @@
 var fs = require('fs');
 
 var path = require('path');
-var LOG_COLOR = '\x1B[31m ';
+var LOG_COLOR_WARNING = '\x1B[35m ';
+var LOG_COLOR_ERROR = '\x1B[31m ';
 var LinesWebpackPlugin = /** @class */ (function () {
     function LinesWebpackPlugin(options) {
         this.options = options;
@@ -20,16 +21,16 @@ var LinesWebpackPlugin = /** @class */ (function () {
             var content = fs.readFileSync(filePath, 'utf-8');
             var lines = content.split(/\r?\n/).length;
             if (lines > maxLines) {
-                console.error("".concat(LOG_COLOR, "Error: File ").concat(filePath, " has more than maxLines(").concat(maxLines, ") lines\uFF1A").concat(lines));
+                console.error("".concat(LOG_COLOR_ERROR, "Error: File ").concat(filePath, " has more than maxLines(").concat(maxLines, ") lines\uFF1A").concat(lines));
                 this.fileList.push(filePath);
                 //不想影响构建过程,只是想要打印超出限制的文件,可以将errorStatus设置为false
                 if (errorStatus) {
-                    console.error("".concat(LOG_COLOR, "------LinesWebpackPlugin: Build error due to line limit exceeded------"));
+                    console.error("".concat(LOG_COLOR_ERROR, "------LinesWebpackPlugin: Build error due to line limit exceeded------"));
                     process.exit(1);
                 }
             }
             else if (lines > warningLines) {
-                console.warn("".concat(LOG_COLOR, "Warning: File ").concat(filePath, " has more than warningLines(").concat(warningLines, ") lines\uFF1A").concat(lines));
+                console.warn("".concat(LOG_COLOR_WARNING, "Warning: File ").concat(filePath, " has more than warningLines(").concat(warningLines, ") lines\uFF1A").concat(lines));
                 this.fileList.push(filePath);
             }
         }
@@ -42,7 +43,7 @@ var LinesWebpackPlugin = /** @class */ (function () {
                     var directoriesConfig = _this.options;
                     var filePath = module.resource;
                     if (!directoriesConfig || !Array.isArray(directoriesConfig)) {
-                        console.error("".concat(LOG_COLOR, "Params must be an array:"), directoriesConfig);
+                        console.error("".concat(LOG_COLOR_ERROR, "Params must be an array:"), directoriesConfig);
                         return;
                     }
                     directoriesConfig.forEach(function (config) {

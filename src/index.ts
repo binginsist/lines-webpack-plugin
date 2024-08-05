@@ -15,7 +15,8 @@ interface DirectoryConfig {
     errorStatus?: boolean; // 如果超过报错限制行数构建过程是否终止，默认true
 }
 
-const LOG_COLOR = '\x1B[31m '
+const LOG_COLOR_WARNING = '\x1B[35m '
+const LOG_COLOR_ERROR = '\x1B[31m '
 
 class LinesWebpackPlugin {
 
@@ -48,15 +49,15 @@ class LinesWebpackPlugin {
             const content = fs.readFileSync(filePath, 'utf-8');
             const lines = content.split(/\r?\n/).length;
             if (lines > maxLines) {
-                console.error(`${LOG_COLOR}Error: File ${filePath} has more than maxLines(${maxLines}) lines：${lines}`);
+                console.error(`${LOG_COLOR_ERROR}Error: File ${filePath} has more than maxLines(${maxLines}) lines：${lines}`);
                 this.fileList.push(filePath)
                 //不想影响构建过程,只是想要打印超出限制的文件,可以将errorStatus设置为false
                 if (errorStatus) {
-                    console.error(`${LOG_COLOR}------LinesWebpackPlugin: Build error due to line limit exceeded------`);
+                    console.error(`${LOG_COLOR_ERROR}------LinesWebpackPlugin: Build error due to line limit exceeded------`);
                     process.exit(1)
                 }
             } else if (lines > warningLines) {
-                console.warn(`${LOG_COLOR}Warning: File ${filePath} has more than warningLines(${warningLines}) lines：${lines}`);
+                console.warn(`${LOG_COLOR_WARNING}Warning: File ${filePath} has more than warningLines(${warningLines}) lines：${lines}`);
                 this.fileList.push(filePath)
             }
         }
@@ -69,7 +70,7 @@ class LinesWebpackPlugin {
                     const directoriesConfig = this.options;
                     const filePath = module.resource;
                     if (!directoriesConfig || !Array.isArray(directoriesConfig)) {
-                        console.error(`${LOG_COLOR}Params must be an array:`, directoriesConfig)
+                        console.error(`${LOG_COLOR_ERROR}Params must be an array:`, directoriesConfig)
                         return;
                     }
                     directoriesConfig.forEach(config => {
